@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | ARKET Studio</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    .font-heading { font-family: 'Fjalla One', cursive; }
+    .font-body { font-family: 'Poppins', sans-serif; }
+    
+    .sidebar-link.active {
+      background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+      color: #0a0a0a;
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+      color: #0a0a0a;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      color: white;
+    }
+
+    .btn-danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+    }
+
+    input, textarea, select {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    ::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .preview-image {
+      max-width: 200px;
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    /* Mobile Sidebar */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        height: 100vh;
+        z-index: 50;
+        transition: left 0.3s ease;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 40;
+      }
+
+      .sidebar-overlay.show {
+        display: block;
+      }
+
+      .mobile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        background: black;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .desktop-header {
+        display: none;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .mobile-header {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="font-body bg-[#0a0a0a] text-white">
+
+  <!-- Mobile Header -->
+  <div class="mobile-header md:hidden">
+    <h1 class="font-heading text-2xl">ARKET Admin</h1>
+    <button id="mobileMenuBtn" class="text-white p-2">
+      <i class="fas fa-bars text-xl"></i>
+    </button>
+  </div>
+
+  <!-- Sidebar Overlay (Mobile) -->
+  <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+  <div class="flex min-h-screen">
+    
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar w-64 bg-black/50 border-r border-white/10 p-6 flex flex-col">
+      <!-- Close button (Mobile only) -->
+      <button id="closeSidebarBtn" class="md:hidden absolute top-4 right-4 text-white text-2xl">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="mb-10 desktop-header">
+        <h1 class="font-heading text-3xl mb-1">ARKET</h1>
+        <p class="text-white/60 text-sm">Admin Dashboard</p>
+      </div>
+
+      <nav class="flex-1 space-y-2 mt-12 md:mt-0">
+        <a href="#" class="sidebar-link active flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition" data-section="overview">
+          <i class="fas fa-home"></i>
+          <span>Overview</span>
+        </a>
+        <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition hover:bg-white/5" data-section="projects">
+          <i class="fas fa-folder"></i>
+          <span>Manage Projects</span>
+        </a>
+        <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition hover:bg-white/5" data-section="selected">
+          <i class="fas fa-star"></i>
+          <span>Selected Projects</span>
+        </a>
+        <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition hover:bg-white/5" data-section="landing">
+          <i class="fas fa-edit"></i>
+          <span>Landing Page Text</span>
+        </a>
+        <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition hover:bg-white/5" data-section="reviews">
+          <i class="fas fa-comment"></i>
+          <span>Client Reviews</span>
+        </a>
+      </nav>
+
+      <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-sm text-red-400 hover:bg-red-500/10 rounded-lg transition">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-4 md:p-8 overflow-y-auto">
+      
+      <!-- OVERVIEW SECTION -->
+      <section id="overview" class="content-section active">
+        <h2 class="text-3xl font-heading mb-6">Dashboard Overview</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div class="glass-card p-6 rounded-xl">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-white/60 text-sm">Total Projects</h3>
+              <i class="fas fa-folder text-2xl text-white/40"></i>
+            </div>
+            <p class="text-4xl font-bold" id="totalProjects">0</p>
+          </div>
+
+          <div class="glass-card p-6 rounded-xl">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-white/60 text-sm">Client Reviews</h3>
+              <i class="fas fa-comment text-2xl text-white/40"></i>
+            </div>
+            <p class="text-4xl font-bold" id="totalReviews">0</p>
+          </div>
+
+          <div class="glass-card p-6 rounded-xl">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-white/60 text-sm">Selected Projects</h3>
+              <i class="fas fa-star text-2xl text-white/40"></i>
+            </div>
+            <p class="text-4xl font-bold" id="selectedCount">0</p>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 rounded-xl">
+          <h3 class="text-xl font-semibold mb-4">Quick Actions</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <button class="sidebar-link px-4 py-3 rounded-lg text-sm hover:bg-white/5 transition" data-section="projects">
+              + Add Project
+            </button>
+            <button class="sidebar-link px-4 py-3 rounded-lg text-sm hover:bg-white/5 transition" data-section="reviews">
+              + Add Review
+            </button>
+            <button class="sidebar-link px-4 py-3 rounded-lg text-sm hover:bg-white/5 transition" data-section="landing">
+              Edit Landing
+            </button>
+            <a href="../index.html" target="_blank" class="px-4 py-3 rounded-lg text-sm hover:bg-white/5 transition text-center">
+              View Site <i class="fas fa-external-link-alt text-xs ml-1"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- MANAGE PROJECTS SECTION -->
+      <section id="projects" class="content-section">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-3xl font-heading">Manage Projects</h2>
+          <button id="addProjectBtn" class="btn-primary px-6 py-2 rounded-lg font-semibold">
+            + Add New Project
+          </button>
+        </div>
+
+        <div id="projectsList" class="grid gap-4">
+          <!-- Projects will be loaded here dynamically -->
+        </div>
+
+        <!-- Add/Edit Project Modal -->
+        <div id="projectModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div class="bg-[#1a1a1a] rounded-2xl p-6 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto my-8">
+            <h3 class="text-xl md:text-2xl font-heading mb-6" id="modalTitle">Add New Project</h3>
+            
+            <form id="projectForm" class="space-y-4">
+              <input type="hidden" id="projectId">
+              
+              <div>
+                <label class="block text-sm mb-2">Project Title</label>
+                <input type="text" id="projectTitle" required class="w-full px-4 py-3 rounded-lg">
+              </div>
+
+              <div>
+                <label class="block text-sm mb-2">Description (Brief)</label>
+                <textarea id="projectDescription" rows="3" required class="w-full px-4 py-3 rounded-lg"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-sm mb-2">Full Project Details</label>
+                <textarea id="projectDetails" rows="5" required class="w-full px-4 py-3 rounded-lg"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-sm mb-2">Hero Image (Main View)</label>
+                <input type="file" id="heroImage" accept="image/*" class="w-full px-4 py-3 rounded-lg">
+                <img id="heroPreview" class="preview-image mt-2 rounded-lg hidden">
+              </div>
+
+              <div>
+                <label class="block text-sm mb-2">Gallery Images (Up to 4)</label>
+                <input type="file" id="galleryImages" accept="image/*" multiple class="w-full px-4 py-3 rounded-lg">
+                <div id="galleryPreviews" class="grid grid-cols-2 gap-2 mt-2"></div>
+              </div>
+
+              <div class="flex gap-4 pt-4">
+                <button type="submit" class="btn-primary px-6 py-3 rounded-lg font-semibold flex-1">
+                  Save Project
+                </button>
+                <button type="button" id="cancelProjectBtn" class="px-6 py-3 rounded-lg border border-white/20 hover:bg-white/5 transition">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- SELECTED PROJECTS SECTION -->
+      <section id="selected" class="content-section">
+        <h2 class="text-3xl font-heading mb-6">Selected Projects (Home Page)</h2>
+        <p class="text-white/60 mb-6">Choose 3 projects to display on the homepage services section</p>
+
+        <div id="selectedProjectsList" class="space-y-4">
+          <!-- Selected projects management will be here -->
+        </div>
+      </section>
+
+      <!-- LANDING PAGE TEXT SECTION -->
+      <section id="landing" class="content-section">
+        <h2 class="text-3xl font-heading mb-6">Edit Landing Page Text</h2>
+
+        <form id="landingForm" class="space-y-6">
+          <div class="glass-card p-6 rounded-xl">
+            <label class="block text-sm mb-2 text-white/80">Hero Heading</label>
+            <input type="text" id="heroHeading" class="w-full px-4 py-3 rounded-lg">
+          </div>
+
+          <div class="glass-card p-6 rounded-xl">
+            <label class="block text-sm mb-2 text-white/80">Hero Subtext</label>
+            <textarea id="heroSubtext" rows="3" class="w-full px-4 py-3 rounded-lg"></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary px-8 py-3 rounded-lg font-semibold">
+            Save Changes
+          </button>
+        </form>
+
+        <p id="landingSuccess" class="text-green-400 text-sm mt-4 hidden">Changes saved successfully!</p>
+      </section>
+
+      <!-- CLIENT REVIEWS SECTION -->
+      <section id="reviews" class="content-section">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-3xl font-heading">Client Reviews</h2>
+          <button id="addReviewBtn" class="btn-primary px-6 py-2 rounded-lg font-semibold">
+            + Add Review
+          </button>
+        </div>
+
+        <div id="reviewsList" class="grid gap-4">
+          <!-- Reviews will be loaded here -->
+        </div>
+
+        <!-- Add/Edit Review Modal -->
+        <div id="reviewModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div class="bg-[#1a1a1a] rounded-2xl p-6 md:p-8 max-w-lg w-full my-8">
+            <h3 class="text-xl md:text-2xl font-heading mb-6" id="reviewModalTitle">Add New Review</h3>
+            
+            <form id="reviewForm" class="space-y-4">
+              <input type="hidden" id="reviewId">
+              
+              <div>
+                <label class="block text-sm mb-2">Client Name</label>
+                <input type="text" id="reviewName" required class="w-full px-4 py-3 rounded-lg" placeholder="e.g., Sarah K.">
+              </div>
+
+              <div>
+                <label class="block text-sm mb-2">Review Text</label>
+                <textarea id="reviewText" rows="4" required class="w-full px-4 py-3 rounded-lg" placeholder="Client's testimonial..."></textarea>
+              </div>
+
+              <div class="flex gap-4 pt-4">
+                <button type="submit" class="btn-primary px-6 py-3 rounded-lg font-semibold flex-1">
+                  Save Review
+                </button>
+                <button type="button" id="cancelReviewBtn" class="px-6 py-3 rounded-lg border border-white/20 hover:bg-white/5 transition">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+
+
+  <!-- Firebase SDK (NO STORAGE - 100% FREE!) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  
+  <script src="js/firebase-config.js"></script>
+  <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

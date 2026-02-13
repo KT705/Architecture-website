@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO - Will be updated dynamically -->
+  <title id="pageTitle">Project | ARKET Architecture Studio</title>
+  <meta name="description" id="pageDescription" content="Architectural project by ARKET Studio featuring modern design and innovative solutions.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    .font-heading { font-family: 'Fjalla One', cursive; }
+    .font-body { font-family: 'Roboto', sans-serif; }
+   
+    #hamburgerBtn span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px 0;
+      background-color: #000;
+      transition: all 0.3s ease;
+    }
+    #hamburgerBtn.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    #hamburgerBtn.open span:nth-child(2) {
+      opacity: 0;
+    }
+    #hamburgerBtn.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }  
+    
+    * {
+      transition-property: color, background-color, border-color, fill, stroke;
+      transition-duration: 500ms;
+      transition-timing-function: ease-in-out;
+    }
+
+    html.dark .outline-text {
+      -webkit-text-stroke: 1px #fff;
+      color: transparent;
+    }
+
+    .loading-skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+
+    .dark .loading-skeleton {
+      background: linear-gradient(90deg, #2a2a2a 25%, #1a1a1a 50%, #2a2a2a 75%);
+      background-size: 200% 100%;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+  </style>
+</head>
+
+<body class="font-sans text-gray-800 dark:bg-[#0a0a0a] dark:text-white">
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 w-full bg-white z-50 border-b dark:bg-[#0a0a0a]/80 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-xl font-semibold">ARKET</a>
+      <nav class="hidden md:flex gap-8 text-sm">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <!-- Dark mode toggle -->
+      <button
+        data-theme-toggle
+        class="hidden md:inline-flex items-center justify-center w-10 h-10 rounded-full
+              border border-black/20 dark:border-white/20
+              hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300
+              dark:bg-white/10 bg-black/5 hover:scale-110 dark:hover:scale-110"
+        aria-label="Toggle dark mode"
+      >
+        <span class="inline-block transition-transform duration-500 dark:rotate-180">🌙</span>
+      </button>
+
+      <!-- Mobile Hamburger -->
+      <div class="md:hidden fixed top-4 right-6 z-50">
+        <button id="hamburgerBtn" aria-label="Menu" class="flex flex-col justify-center items-center w-10 h-10 space-y-1 bg-white rounded-full">
+          <span class="w-6 h-0.5 bg-black dark:bg-white transition-colors duration-500"></span>
+          <span class="w-6 h-0.5 bg-black dark:bg-white transition-colors duration-500"></span>
+          <span class="w-6 h-0.5 bg-black dark:bg-white transition-colors duration-500"></span>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobileMenu"
+        class="fixed top-0 py-10 flex flex-col items-center justify-center gap-8 left-0 w-full bg-white shadow-lg dark:bg-[#0a0a0a] transform -translate-y-full transition-transform duration-300 z-40">
+
+        <button
+          aria-label="Toggle dark mode"
+          data-theme-toggle
+          class="mt-10 pointer-events-auto text-sm underline w-10 h-20 text-black dark:text-white transition-colors duration-500 hover:opacity-70 rounded-full
+                  border border-black/20 dark:border-white/20
+                  hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300
+                  dark:bg-white/10 bg-black/5 hover:scale-110 dark:hover:scale-110"
+        >
+          <span class="inline-block pointer-events-auto transition-transform duration-500 dark:rotate-180">🌙</span>
+        </button>
+
+        <nav class="flex flex-col items-center pb-20 space-y-6 text-lg">
+          <a href="index.html" class="mobile-link pointer-events-auto">Home</a>
+          <a href="about.html" class="mobile-link pointer-events-auto">About</a>
+          <a href="projects.html" class="mobile-link pointer-events-auto">Projects</a>
+          <a href="contact.html" class="mobile-link pointer-events-auto">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- LOADING STATE -->
+  <div id="loadingState" class="pt-32">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="loading-skeleton w-full h-[70vh] rounded mb-8"></div>
+      <div class="max-w-4xl mx-auto">
+        <div class="loading-skeleton h-12 w-3/4 mb-6 rounded"></div>
+        <div class="loading-skeleton h-6 w-full mb-4 rounded"></div>
+        <div class="loading-skeleton h-6 w-5/6 rounded"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT CONTENT (Hidden until loaded) -->
+  <div id="projectContent" class="hidden">
+    <!-- HERO IMAGE -->
+    <section class="pt-32">
+      <div class="max-w-7xl mx-auto px-6">
+        <img
+          id="heroImage"
+          src=""
+          alt="Project Hero"
+          class="w-full h-[70vh] object-cover transform transition-transform duration-300 hover:scale-105 rounded"
+          data-aos="fade-up"
+        >
+      </div>
+    </section>
+
+    <!-- PROJECT DETAILS -->
+    <section class="py-20">
+      <div class="max-w-4xl mx-auto px-6">
+
+        <h1 id="projectTitle" class="text-[2rem] font-light font-heading mb-6 md:text-[3rem]" data-aos="fade-up">
+          <!-- Title loads here -->
+        </h1>
+
+        <p id="projectDescription" class="text-gray-600 dark:text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="100">
+          <!-- Description loads here -->
+        </p>
+
+        <div id="projectDetails" class="space-y-6 text-gray-600 dark:text-gray-400" data-aos="fade-up" data-aos-delay="200">
+          <!-- Detailed text loads here -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECT GALLERY -->
+    <section class="pb-24">
+      <div id="galleryContainer" class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10">
+        <!-- Gallery images load here -->
+      </div>
+    </section>
+
+    <!-- BACK TO PROJECTS -->
+    <section class="pb-24 text-center">
+      <a
+        href="projects.html"
+        class="inline-block px-8 py-3 border border-black text-sm hover:bg-black hover:text-white transition dark:border-white dark:hover:bg-white dark:hover:text-black"
+      >
+        Back to Projects
+      </a>
+    </section>
+  </div>
+
+  <!-- ERROR STATE -->
+  <div id="errorState" class="hidden pt-32 pb-24">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h1 class="text-4xl font-heading mb-6">Project Not Found</h1>
+      <p class="text-gray-600 dark:text-gray-400 mb-8">Sorry, we couldn't find this project.</p>
+      <a href="projects.html" class="inline-block px-8 py-3 bg-black text-white hover:bg-gray-800 transition dark:bg-white dark:text-black">
+        View All Projects
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="py-12 border-t dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+      <p class="text-sm">© 2026 ARKET Studio</p>
+
+      <div class="flex gap-5 text-lg">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

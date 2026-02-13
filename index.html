@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Architect Portfolio | Modern Architecture Studio</title>
+  <meta name="description" content="Premium architecture studio specializing in modern, sustainable and functional design solutions.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Asimovian&family=Bitcount+Grid+Double:wght@100..900&family=Bungee&family=Bungee+Spice&family=Caprasimo&family=Chiron+GoRound+TC:wght@200..900&family=Fjalla+One&family=Moirai+One&family=Playwrite+AU+NSW:wght@100..400&family=Playwrite+AU+QLD:wght@100..400&family=Playwrite+CA:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+Mono+One&family=Tagesschrift&family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/.../fontawesome.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=design_services" />
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+
+    .font-heading { font-family: 'Fjalla One', cursive; }
+    .font-body { font-family: 'Roboto', sans-serif; }
+   /* Hamburger to X */
+    #hamburgerBtn span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px 0;
+      background-color: #000;
+      transition: all 0.3s ease;
+    }
+    #hamburgerBtn.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    #hamburgerBtn.open span:nth-child(2) {
+      opacity: 0;
+    }
+    #hamburgerBtn.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }  
+    /* Smooth transitions for dark mode */
+    * {
+      transition-property: color, background-color, border-color, fill, stroke;
+      transition-duration: 500ms;
+      transition-timing-function: ease-in-out;
+    }
+
+    html.dark .outline-text {
+      -webkit-text-stroke: 1px #fff;
+      color: transparent;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }  
+
+    .review-card {
+  min-width: 300px;
+  max-width: 300px;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.08);
+  flex-shrink: 0;
+}
+
+.dark .review-card {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.1);
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* autoplay animation */
+.animate-scroll {
+  display: flex;
+  gap: 1.5rem;
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused; /* stop autoplay on hover */
+}
+
+/* hide default scrollbar */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+
+  </style>
+</head>
+<body class="font-body text-gray-800 dark:bg-[#0a0a0a] dark:text-white">
+
+  <div id="curtain" class="fixed inset-0 z-50 flex">
+    <div class="left-panel w-1/2 bg-gray-700 transition-transform duration-1000 ease-in-out"></div>
+    <div class="right-panel w-1/2 bg-black transition-transform duration-1000 ease-in-out"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 w-full bg-white z-50 border-b dark:bg-[#0a0a0a]/80 dark:border-white/10">
+    <div class="max-w-full mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-xl font-semibold">ARKET</a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex gap-8 text-sm">
+        <a href="index.html" class="hover:text-gray-500">Home</a>
+        <a href="about.html" class="hover:text-gray-500">About</a>
+        <a href="projects.html" class="hover:text-gray-500">Projects</a>
+        <a href="contact.html" class="hover:text-gray-500">Contact</a>
+      </nav>
+
+       <!-- Dark mode toggle -->
+      <button
+        data-theme-toggle
+        class="hidden md:inline-flex items-center justify-center w-10 h-10 rounded-full
+              border border-black/20 dark:border-white/20
+              hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300
+              dark:bg-white/10 bg-black/5 hover:scale-110 dark:hover:scale-110"
+        aria-label="Toggle dark mode"
+      >
+        <span class="inline-block transition-transform duration-500 dark:rotate-180">🌙</span>
+      </button>
+
+
+      <!-- Mobile Hamburger -->
+     
+      <div class="md:hidden fixed top-4 right-6 z-50">
+          <button id="hamburgerBtn" aria-label="Menu" class="flex flex-col justify-center items-center w-10 h-10 space-y-1 bg-white rounded-full">
+              <span class="w-6 h-0.5 bg-black dark:bg-white transition-colors duration-500"></span>
+              <span class="w-6 h-0.5 bg-black dark:bg-white transition-colors duration-500"></span>
+              <span class="w-6 h-0.5 bg-black dark:bg-white transition-colors duration-500"></span>
+          </button>
+      </div>
+
+      <!-- Mobile menu -->
+
+    
+      <div id="mobileMenu"
+        class="fixed top-0 py-10 flex flex-col items-center justify-center gap-8 left-0 w-full bg-white shadow-lg dark:bg-[#0a0a0a] transform -translate-y-full transition-transform duration-300 z-40">
+
+        <button
+        aria-label="Toggle dark mode"
+        data-theme-toggle
+        class="mt-10 pointer-events-auto text-sm underline w-10 h-20 text-black dark:text-white transition-colors duration-500 hover:opacity-70 rounded-full
+                border border-black/20 dark:border-white/20
+                hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300
+                dark:bg-white/10 bg-black/5 hover:scale-110 dark:hover:scale-110"
+        >
+          <span class="inline-block pointer-events-auto transition-transform duration-500 dark:rotate-180">🌙</span>
+        </button>
+
+        <nav class="flex flex-col items-center pb-20 space-y-6 text-lg">
+            <a href="index.html" class="mobile-link pointer-events-auto">Home</a>
+            <a href="about.html" class="mobile-link pointer-events-auto">About</a>
+            <a href="projects.html" class="mobile-link pointer-events-auto">Projects</a>
+            <a href="contact.html" class="mobile-link pointer-events-auto">Contact</a>
+        </nav>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="pt-32 min-h-screen flex items-center dark:bg-[#0a0a0a] dark:text-white transition-colors duration-500">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div data-aos="fade-up">
+        <h1 id="heroHeading" class="text-[3rem] font-bold leading-tight mb-6 font-heading dark:text-white transition-colors duration-500 md:text-[5rem]">
+          Designing spaces<br>that inspire living
+        </h1>
+        <p id="heroSubtext" class="text-gray-600 font-body mb-8 text-lg dark:text-white/60">
+          A modern architecture studio focused on clarity, purpose and timeless design.
+        </p>
+        <div class="flex gap-4">
+          <a href="projects.html" class="px-6 py-3 border border-black text-sm hover:bg-black hover:text-white transition md:text-xl dark:border-white dark:hover:bg-white dark:hover:text-black transition-all duration-500 hover:scale-105">
+            View Projects
+          </a>
+          <a href="contact.html" class="px-6 py-3 bg-black text-white text-sm hover:bg-gray-800 transition md:text-xl dark:bg-white text-white dark:text-black">
+            Contact Us
+          </a>
+        </div>
+      </div>
+
+      <div data-aos="fade-left -translate-x-1/2 ">
+        <img src="assets/images/hero1.png" alt="Architecture design" class="w-full h-[500px] object-cover animate-[float_3s_ease-in-out_infinite]">
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="py-48 bg-gray-50 dark:bg-[#0a0a0a] dark:text-white transition-colors duration-500">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-[3rem] font-heading font-semibold mb-20 md:text-[4rem]" data-aos="fade-up">Our Services</h2>
+
+      <div class="grid md:grid-cols-3 gap-10">
+        <div data-aos="fade-up" class="text-center border border-black/10 rounded-lg p-5 bg-gray-300 dark:border-white dark:bg-black/10">
+          <i class="fa-solid fa-compass-drafting mb-5 font-bold text-5xl text-center text-black dark:text-white"></i>
+          <h3 class="text-lg mb-3">Architecture Design</h3>
+          <p class="text-gray-600 text-sm">Modern residential and commercial architectural solutions.</p>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="100" class="text-center border border-black/10 rounded-lg p-5 bg-gray-300 dark:border-white dark:bg-black/10">
+          <i class="fa-solid fa-marker mb-5 font-bold text-5xl text-center text-black dark:text-white"></i>
+          <h3 class="text-lg mb-3">Interior Design</h3>
+          <p class="text-gray-600 text-sm">Functional, aesthetic and sustainable interior concepts.</p>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="200" class="text-center border border-black/10 rounded-lg p-5 bg-gray-300 dark:border-white dark:bg-black/10">
+          <i class="fa-solid fa-city mb-5 font-bold text-5xl text-center text-black dark:text-white"></i>
+          <h3 class="text-lg mb-3">Urban Planning</h3>
+          <p class="text-gray-600 text-sm">Thoughtful planning for future-forward communities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED PROJECTS -->
+  <section class="py-48">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-between items-center mb-12 ">
+        <h2 class="text-[3rem] font-heading font-semibold md:text-[4rem]" data-aos="fade-up">Selected Projects</h2>
+        <a href="projects.html" class="text-sm md:text-xl">View all</a>
+      </div>
+
+      <!-- Loading Skeleton -->
+      <div id="projectsLoading" class="grid md:grid-cols-3 gap-8">
+        <div>
+          <div class="w-full h-64 bg-gray-200 dark:bg-gray-800 animate-pulse rounded mb-4"></div>
+          <div class="h-6 bg-gray-200 dark:bg-gray-800 animate-pulse rounded w-3/4 mb-4"></div>
+        </div>
+        <div>
+          <div class="w-full h-64 bg-gray-200 dark:bg-gray-800 animate-pulse rounded mb-4"></div>
+          <div class="h-6 bg-gray-200 dark:bg-gray-800 animate-pulse rounded w-3/4 mb-4"></div>
+        </div>
+        <div>
+          <div class="w-full h-64 bg-gray-200 dark:bg-gray-800 animate-pulse rounded mb-4"></div>
+          <div class="h-6 bg-gray-200 dark:bg-gray-800 animate-pulse rounded w-3/4 mb-4"></div>
+        </div>
+      </div>
+
+      <!-- Projects Container (hidden until loaded) -->
+      <div id="selectedProjectsContainer" class="grid md:grid-cols-3 gap-8 hidden">
+        <!-- Projects will load from Firebase -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="projectsEmpty" class="text-center py-12 hidden">
+        <p class="text-gray-600 dark:text-gray-400">No projects selected yet. Please use the admin panel to select projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL SLIDER -->
+  <section class="py-24 bg-gray-50 dark:bg-[#0a0a0a] overflow-hidden">
+  <h2 class="text-center text-[3rem] font-heading font-semibold mb-12 md:text-[4rem]">
+    What Clients Say
+  </h2>
+
+  <div class="relative w-full overflow-x-auto scrollbar-hide">
+    <!-- UPDATED: This will be populated from Firebase -->
+    <div id="reviewTrack" class="flex gap-6 w-max min-w-full">
+      <!-- Reviews will load from Firebase -->
+      <div class="review-card border rounded-lg p-5 border-black/10 bg-gray-300">
+        <p class="text-sm opacity-80">Loading reviews...</p>
+        <div class="mt-4 font-semibold">Please wait</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-black dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+      <p class="text-sm">© 2026 ARKET Studio</p>
+
+      <nav class="flex flex-col items-center py-20 space-y-6 text-lg">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="about.html" class="mobile-link">About</a>
+            <a href="projects.html" class="mobile-link">Projects</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+        </nav>
+
+      <div class="flex gap-5 text-lg">
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+
+
+  <!-- Firebase SDK - REQUIRED FOR DYNAMIC CONTENT -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
