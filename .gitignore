@@ -102,6 +102,9 @@ firebase-debug.log
 firestore-debug.log
 ui-debug.log
 
+# BUT allow .github folder for GitHub Actions
+!.github/
+
 # ============================================
 # BACKUP FILES
 # ============================================
